@@ -1,0 +1,769 @@
+$allow = array("jpg","jpeg","gif","png");
+$todir = 'img/';      
+  if ( !!$_FILES['image']['name'] ) // is the file uploaded yet?
+  {
+    echo "inside image 1";
+        $info = explode('.', strtolower( $_FILES['image']['name']) ); // whats the extension of the file
+
+        if ( in_array( end($info), $allow) ) // is this file allowed
+        {
+            echo "inside image 2";
+            if ( move_uploaded_file( $_FILES['image']['tmp_name'], $todir . basename($_FILES['image']['name'] ) ) )
+            {
+                echo "inside image 3";
+                echo " the file has been moved correctly";
+                $dst_db="img/".$img;
+            }
+
+        }
+        else
+        {
+            $imageErr= " error this file ext is not allowed";
+            $flag=0;
+        }
+    }
+    if($flag==0)
+    {
+        $sql="insert into product(pro_category,pro_size,pro_type,pro_amount,pro_description,pro_image) values('$cname','$size','$type','$amount','$discription','$img')";
+        $result=mysqli_query($conn,$sql);  
+    }
+}
+
+
+
+
+
+
+<div class="fashion_section">
+         <div id="main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="fashion_taital">Man & Woman Fashion</h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">Man T -shirt</h4>
+                                 <p class="price_text">Price  <span style="color: #262626;">$ 30</span></p>
+                                 <div class="tshirt_img"><img src="images/tshirt-img.png"></div>
+                                 <div class="btn_main">
+                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
+                                    <div class="seemore_bt"><a href="#">Add Cart</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div> 
+               </div>                      
+            </div>
+            <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+            </a>
+         </div>
+      </div>
+      <!-- fashion section end -->
+      <!-- electronic section start -->
+      <div class="fashion_section">
+         <div id="electronic_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="fashion_taital">Electronic</h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">Laptop</h4>
+                                 <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
+                                 <div class="electronic_img"><img src="images/laptop-img.png"></div>
+                                 <div class="btn_main">
+                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
+                                    <div class="seemore_bt"><a href="#">Add Cart</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div> 
+                     </div>
+                  </div>
+               </div>           
+            </div>
+            <a class="carousel-control-prev" href="#electronic_main_slider" role="button" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#electronic_main_slider" role="button" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+            </a>
+         </div>
+      </div>
+      <!-- electronic section end -->
+      <!-- jewellery  section start -->
+      <div class="jewellery_section">
+         <div id="jewellery_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="fashion_taital">Jewellery Accessories</h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">Jumkas</h4>
+                                 <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
+                                 <div class="jewellery_img"><img src="images/jhumka-img.png"></div>
+                                 <div class="btn_main">
+                                    <div class="buy_bt"><a href="#">Buy Now</a></div>
+                                    <div class="seemore_bt"><a href="#">Add Cart</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                          </div>
+                        </div>
+                  </div>
+               </div>
+            </div>
+            <a class="carousel-control-prev" href="#jewellery_main_slider" role="button" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#jewellery_main_slider" role="button" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+            </a>
+            <div class="loader_main">
+               <div class="loader"></div>
+            </div>
+         </div>
+      </div>
+
+
+     
+            <h5 class="product-exp_date"><?php echo $row['exp_date'];?> </h5>
+            <h5 class="product-unit"><?php echo $row['pro_unit'];?> </h5>
+            <h5 class="product-quantity"><?php echo $row['qty'];?> </h5>
+            <h6 class="product-description"><?php echo $row['pro_desc'];?> </h6>
+
+
+            <?php
+        // Assuming you have a database connection established
+
+        // Fetch category names and IDs from the database
+        $query = "SELECT cat_id, cat_name FROM tbl_category";
+        $result2 = mysqli_query($conn, $query);
+
+        if ($result2) {
+            // Loop through the results and display category names with links
+            while ($row = mysqli_fetch_assoc($result2)) {
+                echo '<li><a href="viewbycat.php?id=' . $row['cat_id'] . '">' . $row['cat_name'] . '</a></li>';
+            }
+        } else {
+            echo "Error fetching categories: " . mysqli_error($conn);
+        }
+        ?>
+    </ul>
+
+
+
+    <?php
+// Assuming you have a database connection established
+include('connection.php');
+if (isset($_GET['id'])) {
+    $cat_id = $_GET['id'];
+
+    // Fetch products for the given category
+    $query = "SELECT tbl_product.*, tbl_category.cat_name 
+    FROM tbl_product 
+    JOIN tbl_category ON tbl_product.cat_id = tbl_category.cat_id 
+    WHERE tbl_product.cat_id = $cat_id";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        // Loop through the results and display product details
+        while ($row = mysqli_fetch_assoc($result)) {?>
+            
+            <div class="col-lg-4 col-sm-6">
+            <div class="product-item">
+            <div class="pi-pic">
+                <img src="./imgs/<?php echo $row['pro_imag'];?>" alt="">
+            </div>
+            <div class="card-body">
+            <h4 class="product-name"><?php echo $row['pro_name'];?> </h4>
+            <h6 class="card-text"><?php echo $row['cat_name'];?> </h6>
+            <h5 class="product-quantity"><?php echo $row['qty'];?> </h5>
+            <br>
+            <p class="product-price">₹ <?php echo $row['pro_price'];?></p>
+        
+            <a href="addtocart.php?id=<?php echo $row['pro_id'];?>" class="btn btn-primary">Add to Cart</a><br><br><a href="buy.php?id=<?php echo $row['pro_id'];?>" class="btn btn-secondary">Buy Now</a><br>
+          
+ 
+            
+        </div>
+        </div>
+        </div>
+       <?php }
+    } else {
+        echo "Error fetching products: " . mysqli_error($conn);
+    }
+} else {
+    echo "Invalid category ID.";
+}
+?>
+
+
+<?php
+include('connection.php');
+session_start();
+// Assuming you have a session already started
+$c_id = $_SESSION['customerid'];
+
+// Prepare the SQL statement with a placeholder for the user input
+$sql = "SELECT p.pro_imag, p.pro_name, p.pro_price, c.cart_id, c.quantity, p.qty AS qty, (p.pro_price * c.quantity) AS total_price 
+        FROM tbl_cart c 
+        JOIN tbl_product p ON c.pro_id = p.pro_id 
+        WHERE c.c_id = ?";
+
+// Initialize a prepared statement
+$stmt = $conn->prepare($sql);
+
+if ($stmt) {
+    // Bind the user input to the prepared statement as a parameter
+    $stmt->bind_param("s", $c_id);
+
+    // Execute the prepared statement
+    $stmt->execute();
+
+    // Get the result set
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $cartItems = array();
+        while ($row = $result->fetch_assoc()) {
+            $cartItems[] = $row;
+        }
+
+    } else {
+        $cartItems = array(); // No items in the cart
+    }
+
+    // Close the prepared statement
+    $stmt->close();
+} else {
+    // Handle errors with the prepared statement
+    die("Error in preparing the statement: " . $conn->error);
+}
+
+// Close the database connection
+$conn->close();
+?>
+
+
+<?php
+session_start();
+
+include('connection.php');
+
+if (isset($_SESSION['customerid'])) {
+    $c_id = $_SESSION['customerid'];
+    echo $c_id;
+
+    if (isset($_GET['id'])) {
+        $pro_id = $_GET['id'];
+        $quantity = 1;
+
+        // Use prepared statements and parameter binding
+        $insert_query = "INSERT INTO tbl_cart (pro_id, c_id, quantity) VALUES (?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $insert_query);
+
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, 'sss', $pro_id, $c_id, $quantity);
+
+            if (mysqli_stmt_execute($stmt)) {
+                echo "Record inserted successfully.";
+                header("Location: viewcart.php");
+                exit(); // Make sure to exit after redirection
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
+
+            mysqli_stmt_close($stmt);
+        } else {
+            echo "Error in preparing the statement: " . mysqli_error($conn);
+        }
+    } else {
+        echo "No product ID provided.";
+    }
+} else {
+    echo "Session variable 'customerid' is not set.";
+}
+
+mysqli_close($conn);
+?>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/ncart.css">
+    <link href="css/about.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="hero_bg_box">
+        <div class="img-box">
+            <img src="img/gallery-5.jpg" alt="">
+        </div>
+    </div>
+    <header class="header_section">
+        <div class="header_bottom">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="#">
+                        <span>
+                            <h1 class="m-0">COWCART</h1>
+                        </span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class=""></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="customer.php">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <?php
+    // Replace this with your database connection code
+    $conn = mysqli_connect("your_host", "your_username", "your_password", "your_database");
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    // Initialize a variable to keep track of the total price
+    $totalPrice = 0;
+
+    // Assuming you have an array of products, you can loop through them like this
+    $products = array(
+        array(
+            "pro_imag" => "product1.jpg",
+            "pro_name" => "Product 1",
+            "pro_price" => 10.99,
+            "quantity" => 2
+        ),
+        array(
+            "pro_imag" => "product2.jpg",
+            "pro_name" => "Product 2",
+            "pro_price" => 15.99,
+            "quantity" => 1
+        )
+    );
+
+    if (!empty($products)) {
+    ?>
+        <main>
+            <section class="gradient-custom">
+                <div class="container py-5">
+                    <div class="row d-flex justify-content-center my-4">
+                        <div class="col-md-8">
+                            <div class="card mb-4">
+                                <div class="card-header py-3">
+                                    <h5 class="mb-0">Cart - <?php echo count($products); ?> items</h5>
+                                </div>
+                                <div class="card-body">
+                                    <?php
+                                    foreach ($products as $product) {
+                                        // Calculate total price for each product
+                                        $totalProductPrice = $product['pro_price'] * $product['quantity'];
+                                        $totalPrice += $totalProductPrice;
+                                    ?>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                                                    <img src="imgs/<?php echo $product['pro_imag']; ?>" class="w-100" alt="<?php echo $product['pro_name']; ?>" />
+                                                    <a href="#!">
+                                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-5 col-md-6">
+                                                <p><strong><?php echo $product['pro_name']; ?></strong></p>
+
+                                                <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip" title="Remove item">
+                                                    <!-- Add a link to remove the product -->
+                                                    <a href="remove_product.php?id=<?php echo $product['product_id']; ?>" style="text-decoration: none; color: white;">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </button>
+
+                                                <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip" title="Move to the wish list">
+                                                    <i class="fas fa-heart"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="d-flex align-items-center mb-4" style="max-width: 300px;">
+                                                    <!-- Add buttons to increase and decrease quantity -->
+                                                    <a href="qtyminus.php?id=<?php echo $product['product_id']; ?>" class="btn btn-primary quantity-btn">
+                                                        <i class="fas fa-minus"></i>
+                                                    </a>
+                                                    <input type="text" id="quantity" value="<?php echo $product['quantity']; ?>" class="form-control mx-2">
+                                                    <a href="qtyplus.php?id=<?php echo $product['product_id']; ?>" class="btn btn-primary quantity-btn">
+                                                        <i class="fas fa-plus"></i>
+                                                    </a>
+                                                </div>
+                                                <p class="text-start text-md-center"><strong>₹<?php echo number_format($totalProductPrice, 2); ?></strong></p>
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
+                                    <hr class="my-4">
+                                    <p class="text-end"><strong>Total Price: ₹<?php echo number_format($totalPrice, 2); ?></strong></p>
+                                </div>
+                            </div>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <p><strong>Expected shipping delivery</strong></p>
+                                    <p class="mb-0">12.10.2020 - 14.10.2020</p>
+                                </div>
+                            </div>
+                            <div class="card mb-4 mb-lg-0">
+                                <div class="card-body">
+                                    <p><strong>We accept</strong></p>
+                                    <img class="me-2" width="45px"
+                                        src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                                        alt="Visa" />
+                                    <img class="me-2" width="45px"
+                                        src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                                        alt="American Express" />
+                                    <img class="me-2" width="45px"
+                                        src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                                        alt="Mastercard" />
+                                    <img class="me-2" width="45px"
+                                        src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
+                                        alt="PayPal acceptance mark" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-header py-3">
+                                    <h5 class="mb-0">Summary</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <?php
+                                        foreach ($products as $product) {
+                                        ?>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                                <span><?php echo $product['pro_name']; ?></span>
+                                                <span>₹<?php echo number_format($product['pro_price'], 2); ?></span>
+                                            </li>
+                                        <?php
+                                        }
+                                        ?>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            Shipping
+                                            <span></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                            <div>
+                                                <strong>Total amount (including VAT)</strong>
+                                            </div>
+                                            <span><strong>Total Price: ₹<?php echo number_format($totalPrice, 2); ?></strong></span>
+                                        </li>
+                                    </ul>
+                                    <button type="button" class="btn btn-primary btn-lg btn-block">
+                                        Go to checkout
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    <?php
+    } else {
+        echo "<p>Your cart is empty.</p>";
+    }
+    ?>
+</body>
+
+</html>
+
+
+<?php
+$sql = "SELECT * FROM tbl_customer ORDER BY id DESC LIMIT 1";
+$result = mysqli_query($conn,$sql);
+while ($row = mysqli_fetch_array($result)) {
+?>
+			 					
+			 					<div class="summary-item"><span class="text"><?php echo  $row['c_name']; ?></span><span class="price"></span></div>
+                        <div class="summary-item"><span class="text"><?php echo  $row['mobile']; ?></span><span class="price"></span></div>
+			 					<div class="summary-item"><span class="text"><?php echo  $row['h_name']; ?></span><span class="price"></span></div>
+			 					<div class="summary-item"><span class="text"><?php echo  $row['street']; ?></span><span class="price"></span></div>
+                        <div class="summary-item"><span class="text"><?php echo  $row['city']; ?></span><span class="price"></span></div>
+                        <div class="summary-item"><span class="text"><?php echo  $row['landmark']; ?></span><span class="price"></span></div>
+                        <div class="summary-item"><span class="text"><?php echo  $row['district']; ?></span><span class="price"></span></div>
+                        <div class="summary-item"><span class="text"><?php echo  $row['pincode']; ?></span><span class="price"></span></div>
+
+			 					<div class="summary-item"><span class="text"></span><span class="price"></span></div>
+			 					<div class="summary-item"><span class="text"></span><span class="price"></span></div>
+			 					<div class="summary-item"><span class="text"></span><span class="price"><?php echo $price;?></span></div>
+                                 <?php } ?>
+                                 <a href="shippingadd.php">
+                                 <button type="button" class="btn btn-primary btn-lg btn-block">Add new address</button>
+                                 </a>
+
+
+
+
+                                 
+
+                                 <?php
+session_start();
+include('connection.php');
+if (isset($_GET['id'])) {
+    $pro_id = $_GET['id'];  
+    $_SESSION["pro_id"]=$pro_id;
+} else {
+     
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    $del_fname=$_POST['del_fname'];
+    $del_lname=$_POST['del_lname'];
+    $del_hname=$_POST['del_hname'];
+    $del_phn=$_POST['del_phn'];
+    $del_place=$_POST['del_place'];
+    $del_lmark=$_POST['del_lmark'];
+    $del_pin=$_POST['del_pin'];
+    $del_dist=$_POST['del_dist'];
+    $cust_id=$_SESSION['customerid'];
+   
+    $qty=$_POST['qty'];
+    echo"cust";
+    echo $cust_id;
+    echo "date";
+    $date=date("y/m/d");
+    echo $date;
+    echo "quantity";
+    echo "qty";
+    echo $qty;
+    $_SESSION["qty"]=$qty;
+    
+    $sql_shipping = "INSERT INTO tbl_delivery(del_fname, del_lname, del_hname, del_phn, del_place, del_lmark, del_pin, del_dist) 
+                         VALUES('$del_fname', '$del_lname', '$del_hname', '$del_phn', '$del_place', '$del_lmark', '$del_pin', '$del_dist')";
+
+        $result_shipping = mysqli_query($data, $sql_shipping);
+
+        $del_id=mysqli_insert_id($data);
+        echo "deliveryid";
+        echo $del_id;
+     $pro_id=$_SESSION["pro_id"];
+     echo $pro_id;
+        $sql="SELECT * FROM tbl_product where pro_id='".$pro_id."'";
+        $result=mysqli_query($data,$sql);
+        $row=mysqli_fetch_array($result);
+        $amt=$row['pro_price'];
+echo"price";
+echo$amt;
+$tot=$amt*$qty;
+     $sql="INSERT INTO tbl_ordermaster(cust_id,del_id,tot_amt,ord_date) values('$cust_id','$del_id','$tot','$date')";
+ mysqli_query($data,$sql);
+ $orm_id=mysqli_insert_id($data);
+    $sql="INSERT INTO tbl_order(pro_id,qty,amount,orm_id) values(' $pro_id','$qty','$tot','$orm_id')";
+    mysqli_query($data,$sql);
+         header("location:bill.php");
+        }
+?>
+
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Fashi Template">
+    <meta name="keywords" content="Fashi, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Buy Now</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="cart/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="cart/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="cart/css/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="cart/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="cart/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="cart/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="cart/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="cart/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="cart/css/style.css" type="text/css">
+        <link rel="stylesheet" href="footer/css/style.css">
+    <style>
+        .textbox {
+  width: 50px; /* Adjust the width as needed */
+}
+    </style>
+</head>
+
+<body>
+     <!-- Header Start -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+  <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text product-more">
+                        <a href="index.php"><i class="fa fa-home" style="color:#e3b80c"></i> Home</a>
+                        <span>Buy Now</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</nav>
+    <!-- Breadcrumb Section Begin -->
+    <section class="checkout-section spad">
+        <div class="container">
+            
+          <form action="buynow.php" method="POST" class="checkout-form">
+                <div class="row">
+                    <div class="col-lg-6">
+                 
+                        <h4>Delivery Details</h4>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="fir">First Name<span>*</span></label>
+                                <input type="text" id="fir" name="del_fname">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="last">Last Name<span>*</span></label>
+                                <input type="text" id="last" name="del_lname">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="cun">District<span>*</span></label>
+                                <input type="text" id="cun" name="del_dist">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="street">House Name<span>*</span></label>
+                                <input type="text" id="street" class="street-first" name="del_hname">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="cun-name">Land Mark</label>
+                                <input type="text" id="cun-name" name="del_lmark">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="town">Place<span>*</span></label>
+                                <input type="text" id="town" name="del_place">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="zip">Pincode</label>
+                                <input type="text" id="zip" name="del_pin">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="phone">Phone<span>*</span></label>
+                                <input type="text" id="phone" name="del_phn">
+                            </div>
+                            <div class="col-lg-12">
+                            <input type="submit" value="SUBMIT" class="btn-btn-dark" name="submit" >
+                            </div>
+                        </div>
+                
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="place-order">
+                            <h4>Your Order</h4>
+                           <br> <div class="order-total">
+                                <ul class="order-table">
+                                    <li>Product<span>Total</span></li>
+                                    <?php
+                                    $sql="select * from tbl_product where pro_id='".$pro_id."'";
+                                        $result=mysqli_query($data,$sql);
+
+                       while($item = mysqli_fetch_array($result))
+                       {
+                        
+                        ?>
+                                    <li class="fw-normal"><?php echo $item['pro_name'];?> unit price:<?php echo $item['pro_price'];?>
+                                   
+                                   <input type="number" id="quantity" class="textbox" name="qty" placeholder="Enter Quantity" > 
+                                   <span></span></li> 
+                                   <?php   
+                       }
+                       ?>
+                                    <li class="total-price">Total<span><?php echo $totalprice;?> ₹</span></li>
+                                </ul>
+                                <div class="order-btn">
+                                    <button type="submit" class="site-btn place-btn">Place Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript"  src="cart/js/main.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+        $('#quantity').on('keyup',function(){
+            var qty = $(this).val();
+            $.ajax({
+                    
+            })
+      
+
+        console.log("You wrote 'yes' " +qty+ " times");
+    
+});
+        
+    });
+      
+        </script>
+         <div class>
+    <?php
+  include('footer.html')
+  ?>
+  </div>                
+ <!-- Js Plugins -->
+ <script src="cart/js/jquery-3.3.1.min.js"></script>
+    <script src="cart/js/bootstrap.min.js"></script>
+    <script src="cart/js/jquery-ui.min.js"></script>
+    <script src="cart/js/jquery.countdown.min.js"></script>
+    <script src="cart/js/jquery.nice-select.min.js"></script>
+    <script src="cart/js/jquery.zoom.min.js"></script>
+    <script src="cart/js/jquery.dd.min.js"></script>
+    <script src="cart/js/jquery.slicknav.js"></script>
+    <script src="cart/js/owl.carousel.min.js"></script>
+    <script src="cart/js/main.js"></script>
+</body>
+</html>

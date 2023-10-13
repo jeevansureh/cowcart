@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sidebar Menu for Admin Dashboard | CodingNepal</title>
+    <link rel="stylesheet" href="css/admin.css" />
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  </head>
+  <body>
+    <nav class="sidebar">
+      <a href="#" class="logo">HELLO SIR!</a>
+
+      <div class="menu-content">
+        <ul class="menu-items">
+          <div class="menu-title">Your menu title</div>
+
+          <li class="item">
+            <a href="staffmanagment.html">Manage dealer</a>
+          </li>
+
+          <li class="item">
+            <div class="submenu-item">
+              <span>category</span>
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+            <ul class="menu-items submenu">
+              <div class="menu-title">
+                <i class="fa-solid fa-chevron-left"></i>
+                
+              </div>
+              <li class="item">
+                <a href="add_category.php">Add category</a>
+              </li>
+              <li class="item">
+                <a href="#">First sublink</a>
+              </li>
+              <li class="item">
+                <a href="#">First sublink</a>
+              </li>
+            </ul>
+          </li>
+          <li class="item">
+            <div class="submenu-item">
+              <span>sub category</span>
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+            <ul class="menu-items submenu">
+              <div class="menu-title">
+                <i class="fa-solid fa-chevron-left"></i>
+                Your submenu title
+              </div>
+              <li class="item">
+                <a href="add_subcategory.php">Add Sub category</a>
+              </li>
+              <li class="item">
+                <a href="#">Second sublink</a>
+              </li>
+              <li class="item">
+                <a href="#">Second sublink</a>
+              </li>
+             </ul>
+          </li>
+
+          <li class="item">
+            <a href="#">Your second link</a>
+          </li>
+
+          <li class="item">
+            <a href="#">Your third link</a>
+          </li>
+          <li class="item">
+            <a href="signout.php">sign out</a>
+          </li>
+        </ul>
+      </div>
+    
+    </nav>
+
+    <nav class="navbar">
+      <i class="fa-solid fa-bars" id="sidebar-close"></i>
+    </nav>
+
+    <main class="main">
+      <h1 style="color: white;">Admin Dashboard</h1>
+    </main>
+
+    <script src="js/admin.js"></script>
+  </body>
+</html>
